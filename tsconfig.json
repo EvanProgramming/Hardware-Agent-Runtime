@@ -3,6 +3,7 @@
   "references": [
     { "path": "packages/core" },
     { "path": "packages/adapters-arduino" },
+    { "path": "packages/mcp" },
     { "path": "packages/cli" }
   ]
 }

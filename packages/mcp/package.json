@@ -1,0 +1,1 @@
+{"name":"@carduino/mcp","version":"0.1.0","private":true,"type":"module","exports":"./dist/server.js","dependencies":{"@carduino/core":"file:../core","@carduino/arduino-cli":"file:../adapters-arduino"}}

@@ -6,7 +6,11 @@ HAR is **not** an AI agent and contains no LLM. The first target is Arduino thro
 
 ## Status
 
-This repository intentionally contains architecture and executable data contracts only. Production runtime code is out of scope for this phase.
+This repository contains both the approved architecture and its runnable local-first MVP implementation.
+
+## MVP implementation
+
+The repository now includes a local TypeScript MVP: SQLite/WAL state storage, Arduino CLI adapter, serial diagnostics, metadata-only drivers, deterministic experiments with persisted human-action pauses, safety analysis, simulation, verification reports, CLI, and a local STDIO MCP server. See [installation and Codex MCP setup](docs/installation.md).
 
 ## Reading order
 
