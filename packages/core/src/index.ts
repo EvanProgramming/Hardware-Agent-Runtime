@@ -3,6 +3,7 @@ export * from "./adapters.js";
 export * from "./context.js";
 export * from "./diagnostics.js";
 export * from "./drivers.js";
+export * from "./flash-observe.js";
 export * from "./models.js";
 export * from "./persistence.js";
 export * from "./project-service.js";
