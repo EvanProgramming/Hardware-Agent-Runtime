@@ -6,8 +6,8 @@
 
 ```bash
 brew install arduino-cli
-git clone https://github.com/EvanProgramming/Carduino.git
-cd Carduino
+git clone https://github.com/EvanProgramming/Hardware-Agent-Runtime.git
+cd Hardware-Agent-Runtime
 npm install
 npm run build
 ```
@@ -26,8 +26,8 @@ codex mcp list
 ```toml
 [mcp_servers.carduino]
 command = "node"
-args = ["/absolute/path/Carduino/packages/mcp/dist/server.js"]
-cwd = "/absolute/path/Carduino"
+args = ["/absolute/path/Hardware-Agent-Runtime/packages/mcp/dist/server.js"]
+cwd = "/absolute/path/Hardware-Agent-Runtime"
 startup_timeout_sec = 20
 tool_timeout_sec = 120
 ```

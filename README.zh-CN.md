@@ -1,6 +1,6 @@
-# Carduino
+# Hardware Agent Runtime
 
-Carduino 是 Hardware Agent Runtime（HAR）v1.0 的本地优先运行时与架构仓库。它让外部 AI 编程代理能够安全地编译、烧录、观测、实验并验证真实嵌入式硬件。
+Hardware Agent Runtime（HAR）v1.0 是本地优先运行时与架构仓库。它让外部 AI 编程代理能够安全地编译、烧录、观测、实验并验证真实嵌入式硬件。
 
 HAR **不是** AI Agent，不包含 LLM。首个目标是通过 Arduino CLI 支持 Arduino；适配器架构为 PlatformIO、ESP-IDF、Zephyr、RP2040、STM32 与 MicroPython 保留扩展路径。
 

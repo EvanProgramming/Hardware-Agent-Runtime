@@ -1,6 +1,6 @@
 {
   "$schema":"https://json-schema.org/draft/2020-12/schema",
-  "$id":"https://github.com/EvanProgramming/Carduino/schemas/har-v1.schema.json",
+  "$id":"https://github.com/EvanProgramming/Hardware-Agent-Runtime/schemas/har-v1.schema.json",
   "title":"HAR v1 core contracts",
   "oneOf":[
     {"$ref":"#/$defs/ProjectState"},{"$ref":"#/$defs/BoardDescriptor"},{"$ref":"#/$defs/ComponentInstance"},{"$ref":"#/$defs/PinDefinition"},{"$ref":"#/$defs/Connection"},{"$ref":"#/$defs/FirmwareArtifact"},{"$ref":"#/$defs/HardwareContext"},{"$ref":"#/$defs/DiagnosticReport"},{"$ref":"#/$defs/DiagnosticFinding"},{"$ref":"#/$defs/SerialObservation"},{"$ref":"#/$defs/UsbObservation"},{"$ref":"#/$defs/DriverDefinition"},{"$ref":"#/$defs/ExperimentDefinition"},{"$ref":"#/$defs/ExperimentStep"},{"$ref":"#/$defs/ExperimentRun"},{"$ref":"#/$defs/HumanActionRequest"},{"$ref":"#/$defs/HumanActionResponse"},{"$ref":"#/$defs/VerificationEvidence"},{"$ref":"#/$defs/VerificationReport"},{"$ref":"#/$defs/ResourceReport"},{"$ref":"#/$defs/SimulationState"},{"$ref":"#/$defs/RuntimeEvent"},{"$ref":"#/$defs/ErrorEnvelope"}

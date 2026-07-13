@@ -5,8 +5,8 @@
 Install Node.js 22+, Arduino CLI, and Git. On macOS: `brew install arduino-cli`.
 
 ```bash
-git clone https://github.com/EvanProgramming/Carduino.git
-cd Carduino
+git clone https://github.com/EvanProgramming/Hardware-Agent-Runtime.git
+cd Hardware-Agent-Runtime
 npm install
 npm run build
 ```
@@ -25,8 +25,8 @@ Alternatively add this to `~/.codex/config.toml` (replace the path):
 ```toml
 [mcp_servers.carduino]
 command = "node"
-args = ["/absolute/path/Carduino/packages/mcp/dist/server.js"]
-cwd = "/absolute/path/Carduino"
+args = ["/absolute/path/Hardware-Agent-Runtime/packages/mcp/dist/server.js"]
+cwd = "/absolute/path/Hardware-Agent-Runtime"
 startup_timeout_sec = 20
 tool_timeout_sec = 120
 ```
