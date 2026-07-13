@@ -9,6 +9,8 @@ export interface ProjectStore {
   load(projectId: string): ProjectState | undefined;
   save(project: ProjectState, event: Omit<RuntimeEvent, "sequence">): RuntimeEvent;
   events(projectId: string): RuntimeEvent[];
+  saveRecord<T extends { id: string }>(collection: string, value: T): void;
+  loadRecord<T>(collection: string, id: string): T | undefined;
   close(): void;
 }
 
@@ -19,7 +21,7 @@ export class SqliteProjectStore implements ProjectStore {
   public constructor(filename: string) {
     mkdirSync(dirname(filename), { recursive: true });
     this.db = new Database(filename);
-    this.db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; CREATE TABLE IF NOT EXISTS projects (id TEXT PRIMARY KEY, value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS runtime_events (project_id TEXT NOT NULL, sequence INTEGER NOT NULL, value TEXT NOT NULL, PRIMARY KEY(project_id, sequence));");
+    this.db.exec("PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON; CREATE TABLE IF NOT EXISTS projects (id TEXT PRIMARY KEY, value TEXT NOT NULL); CREATE TABLE IF NOT EXISTS runtime_events (project_id TEXT NOT NULL, sequence INTEGER NOT NULL, value TEXT NOT NULL, PRIMARY KEY(project_id, sequence)); CREATE TABLE IF NOT EXISTS records (collection TEXT NOT NULL, id TEXT NOT NULL, value TEXT NOT NULL, PRIMARY KEY(collection, id));");
   }
 
   public create(project: ProjectState): void {
@@ -51,6 +53,8 @@ export class SqliteProjectStore implements ProjectStore {
   public events(projectId: string): RuntimeEvent[] {
     return (this.db.prepare("SELECT value FROM runtime_events WHERE project_id = ? ORDER BY sequence").all(projectId) as { value: string }[]).map((row) => JSON.parse(row.value) as RuntimeEvent);
   }
+  public saveRecord<T extends { id: string }>(collection: string, value: T): void { this.db.prepare("INSERT INTO records(collection, id, value) VALUES (?, ?, ?) ON CONFLICT(collection, id) DO UPDATE SET value=excluded.value").run(collection, value.id, JSON.stringify(value)); }
+  public loadRecord<T>(collection: string, id: string): T | undefined { const row = this.db.prepare("SELECT value FROM records WHERE collection = ? AND id = ?").get(collection, id) as { value: string } | undefined; return row === undefined ? undefined : JSON.parse(row.value) as T; }
   public close(): void { this.db.close(); }
 
   private notFound(code: string, message: string, retryable: boolean): HarError {
