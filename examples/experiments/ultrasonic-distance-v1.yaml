@@ -1,0 +1,8 @@
+apiVersion: har/v1
+kind: ExperimentDefinition
+id: ultrasonic-distance-v1
+version: 1.0.0
+steps:
+  - {id: position, type: request_human_action, actionType: numeric_input, instruction: Place target and enter distance cm, timeoutMs: 300000}
+  - {id: capture, type: capture_serial, durationMs: 3000, timeoutMs: 5000}
+  - {id: range, type: assert_numeric_range, field: distance, min: 2, max: 400, timeoutMs: 1000}

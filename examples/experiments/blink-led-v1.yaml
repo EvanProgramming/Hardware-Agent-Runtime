@@ -1,0 +1,9 @@
+apiVersion: har/v1
+kind: ExperimentDefinition
+id: blink-led-v1
+version: 1.0.0
+steps:
+  - {id: startup, type: capture_serial, durationMs: 3000, timeoutMs: 5000}
+  - {id: heartbeat, type: assert_text, contains: HEARTBEAT, timeoutMs: 1000}
+  - {id: observe, type: request_human_action, actionType: confirmation, instruction: Confirm the built-in LED is blinking, timeoutMs: 300000}
+  - {id: collect, type: collect_evidence, timeoutMs: 1000}

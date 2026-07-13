@@ -1,0 +1,1 @@
+{"apiVersion":"har/v1","kind":"DriverDefinition","id":"board.builtin-led","version":"1.0.0","capabilities":["digital_output","visible_indicator"],"compatibleBoards":["arduino:avr:uno","arduino:avr:nano","arduino:avr:mega"],"knownIssues":["Built-in LED pin differs by board; use board metadata."],"experimentTemplates":["blink-led-v1"],"humanActionTemplates":["confirm_led_blink"]}

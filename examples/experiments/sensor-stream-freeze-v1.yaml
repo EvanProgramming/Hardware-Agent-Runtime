@@ -1,0 +1,8 @@
+apiVersion: har/v1
+kind: ExperimentDefinition
+id: sensor-stream-freeze-v1
+version: 1.0.0
+steps:
+  - {id: capture, type: capture_serial, durationMs: 30000, timeoutMs: 35000}
+  - {id: rate, type: assert_update_rate, minSamples: 3, timeoutMs: 1000}
+  - {id: freeze, type: assert_numeric_range, field: value, min: -1000000, max: 1000000, timeoutMs: 1000}

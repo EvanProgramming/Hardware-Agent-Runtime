@@ -1,0 +1,13 @@
+apiVersion: har/v1
+kind: DriverDefinition
+id: sensor.temperature-humidity.dht22
+version: 1.0.0
+capabilities: [temperature_c, humidity_percent]
+electrical: {supplyVoltageV: {min: 3.3, max: 6}, currentMa: {typical: 1.5, max: 2.5}}
+compatibleBoards: [arduino:avr:uno, arduino:avr:nano]
+pinConstraints: {data: {requires: digital_input_output}}
+wiring: {vcc: 3.3V_or_5V, gnd: GND, data: digital_io_with_pullup}
+knownIssues: [Minimum sampling interval is approximately two seconds]
+dataParsing: {pattern: 'TEMP_C=(?<temperature>[0-9.-]+) HUM=(?<humidity>[0-9.]+)', fields: [temperature, humidity]}
+experimentTemplates: [sensor-stream-freeze-v1]
+humanActionTemplates: [confirm_sensor_environment]

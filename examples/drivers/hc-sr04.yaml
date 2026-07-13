@@ -1,0 +1,13 @@
+apiVersion: har/v1
+kind: DriverDefinition
+id: sensor.ultrasonic.hc-sr04
+version: 1.0.0
+capabilities: [distance_cm]
+electrical: {supplyVoltageV: {min: 4.5, max: 5.5}, logicLevel: 5V, currentMa: {typical: 15, max: 15}}
+compatibleBoards: [arduino:avr:uno, arduino:avr:nano]
+pinConstraints: {echo: {levelShiftRequiredBelowV: 5}, trig: {forbid: [0, 1]}}
+wiring: {vcc: 5V, gnd: GND, trig: digital_output, echo: digital_input_5v}
+knownIssues: [Echo is 5V on a 3.3V MCU, No echo outside useful range]
+dataParsing: {pattern: 'DIST_CM=(?<distance>[0-9.]+)', field: distance}
+experimentTemplates: [ultrasonic-distance-v1, sensor-stream-freeze-v1]
+humanActionTemplates: [place_target_at_distance]
