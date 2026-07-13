@@ -1,0 +1,8 @@
+{
+  "name": "@carduino/arduino-cli",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": "./dist/index.js",
+  "dependencies": { "@carduino/core": "file:../core" }
+}

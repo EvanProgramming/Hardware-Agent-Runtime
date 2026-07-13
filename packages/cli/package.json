@@ -3,5 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "dependencies": { "@carduino/core": "file:../core" }
+  "dependencies": {
+    "@carduino/core": "file:../core",
+    "@carduino/arduino-cli": "file:../adapters-arduino"
+  }
 }

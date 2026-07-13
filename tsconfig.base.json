@@ -11,6 +11,11 @@
     "sourceMap": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "@carduino/core": ["packages/core/src/index.ts"],
+      "@carduino/arduino-cli": ["packages/adapters-arduino/src/index.ts"]
+    }
   }
 }
