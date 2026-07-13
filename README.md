@@ -2,6 +2,8 @@
 
 Carduino is the architecture repository for Hardware Agent Runtime (HAR) v1.0: a local-first runtime that lets external AI coding agents safely compile, flash, observe, experiment with, and verify real embedded hardware.
 
+简体中文版：[README.zh-CN.md](README.zh-CN.md)；其余中文文档位于 [docs/zh-CN/](docs/zh-CN/README.md)。
+
 HAR is **not** an AI agent and contains no LLM. The first target is Arduino through Arduino CLI; adapters preserve a path to PlatformIO, ESP-IDF, Zephyr, RP2040, STM32, and MicroPython.
 
 ## Status
