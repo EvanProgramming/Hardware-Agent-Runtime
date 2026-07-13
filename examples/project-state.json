@@ -1,0 +1,12 @@
+{
+  "apiVersion": "har/v1",
+  "kind": "ProjectState",
+  "id": "blink-demo",
+  "revision": 1,
+  "createdAt": "2026-07-13T00:00:00.000Z",
+  "updatedAt": "2026-07-13T00:00:00.000Z",
+  "lifecycle": "created",
+  "hardwareModelId": "hardware_model_initial",
+  "components": [],
+  "connections": []
+}
