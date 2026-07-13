@@ -1,0 +1,2 @@
+import { describe, expect, it } from "vitest"; import { analyzeResources } from "./safety.js";
+describe("resource analysis", () => it("blocks duplicate board pin assignments", () => { const report = analyzeResources({ components: [], connections: [{ apiVersion: "har/v1", kind: "Connection", id: "a", from: "component:a", to: "board:D2", stateOrigin: "user_reported" }, { apiVersion: "har/v1", kind: "Connection", id: "b", from: "component:b", to: "board:D2", stateOrigin: "user_reported" }] }); expect(report.status).toBe("blocked"); }));
