@@ -11,7 +11,10 @@
     "test:watch": "vitest",
     "har": "tsx packages/cli/src/main.ts",
     "mcp": "node packages/mcp/dist/server.js",
-    "ci": "tsx packages/cli/src/ci.ts"
+    "ci": "tsx packages/cli/src/ci.ts",
+    "setup": "npm run build && node scripts/setup.mjs",
+    "mcp:install": "node scripts/register-mcp.mjs",
+    "mcp:remove": "codex mcp remove hardware-agent-runtime"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

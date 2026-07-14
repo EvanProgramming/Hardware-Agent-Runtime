@@ -8,6 +8,7 @@
 - [适配器、驱动、诊断与安全](extensibility.md)
 - [MCP API、交付与 ADR](delivery.md)
 - [安装与 Codex MCP 配置](installation.md)
+- [快速开始](quickstart.md)
 - [本地 CI](ci.md)
 - [Hardware CI Runner](ci-runner.md)
 - [v1.0 发布验证](v1-release.md)

@@ -18,6 +18,8 @@ HAR v1.0 is release-ready for the supported Arduino CLI targets. The complete ES
 
 The repository now includes a local TypeScript MVP: SQLite/WAL state storage, Arduino CLI adapter, serial diagnostics, metadata-only drivers, deterministic experiments with persisted human-action pauses, safety analysis, simulation, verification reports, CLI, and a local STDIO MCP server. See [installation and Codex MCP setup](docs/installation.md).
 
+For a fresh installation from GitHub, use the [quick start](docs/quickstart.md).
+
 ## Reading order
 
 1. [System boundary and architecture](docs/architecture.md)
