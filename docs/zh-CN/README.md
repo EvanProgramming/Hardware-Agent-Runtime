@@ -10,5 +10,6 @@
 - [安装与 Codex MCP 配置](installation.md)
 - [本地 CI](ci.md)
 - [Arduino 真实硬件冒烟测试](hardware-smoke-test.md)
+- [ESP32 Dev Module 配置](esp32-setup.md)
 - [架构评审清单](review-checklist.md)
 - [实现来源说明](architecture/implementation-source-note.md)
