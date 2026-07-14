@@ -1,3 +1,9 @@
+#ifndef LED_BUILTIN
+// Generic ESP32 Dev Module variants commonly route an optional onboard LED to GPIO2.
+// Serial HEARTBEAT remains the authoritative runtime signal when no LED is present.
+#define LED_BUILTIN 2
+#endif
+
 const unsigned long intervalMs = 500;
 unsigned long previousMs = 0;
 bool ledOn = false;
