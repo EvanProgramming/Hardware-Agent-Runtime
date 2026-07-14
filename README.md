@@ -10,6 +10,10 @@ HAR is **not** an AI agent and contains no LLM. The first target is Arduino thro
 
 This repository contains both the approved architecture and its runnable local-first MVP implementation.
 
+## v1.0 release status
+
+HAR v1.0 is release-ready for the supported Arduino CLI targets. The complete ESP32 Dev Module flow has been validated on real hardware: discovery, compile, flash, USB/serial recovery, startup capture, diagnostics, human LED confirmation, experiment resume, and a persisted passed verification report. See [the release validation record](docs/v1-release.md).
+
 ## MVP implementation
 
 The repository now includes a local TypeScript MVP: SQLite/WAL state storage, Arduino CLI adapter, serial diagnostics, metadata-only drivers, deterministic experiments with persisted human-action pauses, safety analysis, simulation, verification reports, CLI, and a local STDIO MCP server. See [installation and Codex MCP setup](docs/installation.md).

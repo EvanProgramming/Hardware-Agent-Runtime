@@ -11,7 +11,7 @@
     "test:watch": "vitest",
     "har": "tsx packages/cli/src/main.ts",
     "mcp": "node packages/mcp/dist/server.js",
-    "ci": "tsx packages/cli/src/main.ts ci run"
+    "ci": "tsx packages/cli/src/ci.ts"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",

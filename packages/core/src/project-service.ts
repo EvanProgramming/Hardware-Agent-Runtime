@@ -29,4 +29,17 @@ export class ProjectService {
     const event = this.store.save(updated, { apiVersion: API_VERSION, kind: "RuntimeEvent", id: `event_${randomUUID()}`, type: "project.updated", payload: { revision: updated.revision, fields: Object.keys(patch) }, timestamp: updated.updatedAt, aggregateType: "ProjectState", aggregateId: projectId, ...(correlationId === undefined ? {} : { correlationId }) });
     return { project: updated, event };
   }
+
+  /** Establishes a declared hardware model and moves a new/planning project to ready_to_build. */
+  public prepareHardware(projectId: string, expectedRevision: number, patch: Pick<ProjectPatch, "components" | "connections">): ProjectState {
+    let revision = expectedRevision;
+    let project = this.load(projectId);
+    if (project.lifecycle === "created") project = this.patch(projectId, revision++, { lifecycle: "hardware_planning" }).project;
+    if (project.lifecycle !== "hardware_planning" && project.lifecycle !== "ready_to_build") throw new HarError({ apiVersion: API_VERSION, kind: "ErrorEnvelope", id: `err-project-${randomUUID()}`, code: "INVALID_STATE_TRANSITION", category: "runtime_failure", message: `Cannot prepare hardware while project is ${project.lifecycle}.`, stage: "hardware_model", retryable: false, evidence: [] });
+    project = this.patch(projectId, revision, patch).project;
+    return project.lifecycle === "hardware_planning" ? this.patch(projectId, project.revision, { lifecycle: "ready_to_build" }).project : project;
+  }
+
+  public saveRecord<T extends { id: string }>(collection: string, value: T): void { this.store.saveRecord(collection, value); }
+  public loadRecord<T>(collection: string, id: string): T | undefined { return this.store.loadRecord<T>(collection, id); }
 }

@@ -13,20 +13,21 @@ export class FlashAndObserveService {
     let revision = request.expectedRevision;
     this.projects.patch(request.projectId, revision++, { lifecycle: "compiling" });
     const compile = await this.adapters.toolchain.compile({ sketchPath: request.sketchPath, fqbn: request.fqbn });
-    if (!compile.success) { this.projects.patch(request.projectId, revision, { lifecycle: "failed" }); return { operationId: `operation_${randomUUID()}`, status: "failed", stage: "compile", compile, retryable: false, suggestedNextActions: ["Correct compile errors and submit a new compile request."] }; }
+    if (!compile.success) { this.projects.patch(request.projectId, revision, { lifecycle: "failed" }); return this.persist(request.projectId, { operationId: `operation_${randomUUID()}`, status: "failed", stage: "compile", compile, retryable: false, suggestedNextActions: ["Correct compile errors and submit a new compile request."] }); }
     this.projects.patch(request.projectId, revision++, { lifecycle: "flashing" });
     const usbBefore = await this.adapters.usb.snapshot(); const flash = await this.adapters.flash.flash({ sketchPath: request.sketchPath, fqbn: request.fqbn, port: request.port });
-    if (!flash.success) { this.projects.patch(request.projectId, revision, { lifecycle: "failed" }); return { operationId: `operation_${randomUUID()}`, status: "failed", stage: "flash", compile, flash, usbBefore, retryable: true, suggestedNextActions: ["Check board selection, cable, and bootloader, then retry flash."] }; }
+    if (!flash.success) { this.projects.patch(request.projectId, revision, { lifecycle: "failed" }); return this.persist(request.projectId, { operationId: `operation_${randomUUID()}`, status: "failed", stage: "flash", compile, flash, usbBefore, retryable: true, suggestedNextActions: ["Check board selection, cable, and bootloader, then retry flash."] }); }
     this.projects.patch(request.projectId, revision++, { lifecycle: "observing" });
     const usbAfter = await this.adapters.usb.snapshot();
     try {
       const capture = await this.adapters.serial.capture(request.port, request.baudRate ?? 115200, request.captureDurationMs ?? 3_000); const evidenceId = `serial_${randomUUID()}`;
       const diagnostics = diagnoseSerial([{ id: evidenceId, timestampMs: Date.now(), text: capture.text, rawBase64: capture.rawBase64 }]);
-      this.projects.patch(request.projectId, revision, { lifecycle: "ready_to_build" });
-      return { operationId: `operation_${randomUUID()}`, status: "completed", stage: "complete", compile, flash, usbBefore, usbAfter, serial: { evidenceId, text: capture.text, rawBase64: capture.rawBase64 }, diagnostics, retryable: false, suggestedNextActions: ["Review diagnostics or run an experiment."] };
+      this.projects.patch(request.projectId, revision, { lifecycle: "experimenting" });
+      return this.persist(request.projectId, { operationId: `operation_${randomUUID()}`, status: "completed", stage: "complete", compile, flash, usbBefore, usbAfter, serial: { evidenceId, text: capture.text, rawBase64: capture.rawBase64 }, diagnostics, retryable: false, suggestedNextActions: ["Review diagnostics or run an experiment."] });
     } catch {
       this.projects.patch(request.projectId, revision, { lifecycle: "failed" });
-      return { operationId: `operation_${randomUUID()}`, status: "failed", stage: "observe", compile, flash, usbBefore, usbAfter, retryable: true, suggestedNextActions: ["Confirm the serial port and baud rate, then capture again."] };
+      return this.persist(request.projectId, { operationId: `operation_${randomUUID()}`, status: "failed", stage: "observe", compile, flash, usbBefore, usbAfter, retryable: true, suggestedNextActions: ["Confirm the serial port and baud rate, then capture again."] });
     }
   }
+  private persist(projectId: string, result: FlashAndObserveResult): FlashAndObserveResult { this.projects.saveRecord("flash_runs", { id: result.operationId, projectId, result }); this.projects.saveRecord("flash_latest", { id: projectId, result }); return result; }
 }

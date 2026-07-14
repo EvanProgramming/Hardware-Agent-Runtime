@@ -25,4 +25,10 @@ describe("ProjectService", () => {
     expect(() => service.patch("demo", 1, { lifecycle: "flashing" })).toThrow(/Cannot transition/);
     store.close();
   });
+  it("prepares a new project for build with a durable hardware model", () => {
+    const { service, store } = createService(); const project = service.create({ id: "demo" });
+    const prepared = service.prepareHardware(project.id, project.revision, { components: [], connections: [] });
+    expect(prepared.lifecycle).toBe("ready_to_build"); expect(prepared.revision).toBe(4);
+    store.close();
+  });
 });
