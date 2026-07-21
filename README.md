@@ -1,4 +1,5 @@
 # Hardware Agent Runtime
+#⚠️Hardware Agent Runtime will be merged into Kyrozen with OpenKyrozen.
 
 Hardware Agent Runtime (HAR) v1.0 is a local-first runtime that lets external AI coding agents safely compile, flash, observe, experiment with, and verify real embedded hardware.
 
